@@ -1,0 +1,35 @@
+
+.box{
+  background-color: rgba(84, 191, 240, 0.744);
+  @apply h-[25vh] max-w-[85vw] m-6 mr-auto ml-auto 
+  flex flex-col relative rounded-[7px];
+}
+.btn{
+  @apply  h-[40px]   rounded-[7px] 
+  font-bold text-[12px] p-[5px];
+  cursor: pointer;
+}
+.title{
+  @apply  m-auto text-[50px] bg-transparent;
+}
+.connect{
+  margin: auto;
+  background-color: rgb(0, 211, 11);
+}
+.disconnect{
+  margin: auto;
+  background-color: rgb(229, 23, 64);
+}
+.topic{
+  @apply m-auto mb-0 bg-transparent ;
+}
+.input{
+  @apply p-[5px] m-[20px] text-[17px] rounded-[5px];
+}
+.message{
+  @apply w-[330px] h-[100px] m-auto mb-[20px] rounded-[5px] ;
+  white-space: pre-line;
+  overflow: auto;
+}
+
+

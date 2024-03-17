@@ -1,0 +1,10 @@
+
+# dependencies
+/node_modules
+.yarn/install-state.gz
+
+
+# next.js
+/out/
+
+
