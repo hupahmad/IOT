@@ -32,4 +32,24 @@
   overflow: auto;
 }
 
+.link {
+  @apply rounded-[50%] text-[60px] w-[80px] h-[80px] m-[20px] no-underline text-center;
+  background-color: rgb(0, 132, 255);
+  border: none;
+  right: 0;
+  bottom: 0;
+  color: rgb(222, 242, 253);
+  position: absolute;
 
+}
+.divbtn {
+  /* position: relative; */
+}
+
+.continer{
+  @apply  h-[100vh] relative top-0;
+  box-sizing: border-box;
+  background-color: rgb(205, 236, 254);
+}
+
+/* ====================================== */

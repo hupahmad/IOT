@@ -1,4 +1,4 @@
-// File: /home/zoro/Documents/IOT1/server/frontend/V 1.0/my-app/src/app/layout.jsx
+// File: /home/jon/IOT/IOT/frontend/V 1.0/my-app/src/app/layout.jsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

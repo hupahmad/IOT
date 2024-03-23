@@ -4,8 +4,12 @@
 
 * {
   box-sizing: border-box;
-  background-color: rgb(205, 236, 254);
   padding: 0;
   margin: 0;
   font-family: "Montserrat";
+  overflow: hidden;
+}
+a{
+  @apply no-underline;
+
 }
