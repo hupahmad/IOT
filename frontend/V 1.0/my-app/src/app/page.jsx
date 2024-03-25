@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+//import logo from "@/../public/icon/icons8-delete.svg";
 
 import mqtt from "mqtt";
 // ws://192.168.0.34:9001
@@ -49,14 +50,32 @@ export default function Home() {
   let url = "ws://147.135.51.66:9001";
 
   const [butn, setButn] = useState(conn);
-  const [subTopic, setSubTopic] = useState("");
-  const [pubTopic, setPubTopic] = useState("");
 
   const [subMessage, setSubMessage] = useState("");
   const [pubMessage, setPubMessage] = useState("");
 
   const [btnList, setbtnList] = useState({});
   const [btnArry, setbtnArry] = useState([]);
+
+  const [deleted, setDeleted] = useState("");
+
+  async function Delete(id) {
+    console.log(id);
+    let resp = "";
+    await fetch("http://147.135.51.66:1111/delete", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    }).then(async function (a) {
+      await a.text().then((t) => {
+        resp = t;
+      });
+    });
+    setDeleted(id);
+  }
 
   function toggleConnection() {
     if (butn === conn) {
@@ -87,7 +106,7 @@ export default function Home() {
       console.log(btnArry);
     }
     a();
-  }, []);
+  }, [deleted]);
   return (
     <div className={styles.continer}>
       <div className={styles.box}>
@@ -102,26 +121,31 @@ export default function Home() {
       </div>
 
       <div className={styles.buttons}>
-        {btnArry.map((btn) => {
+        {btnArry.map((btn, index) => {
           return (
-            <div key={btn} id={btn} className="m-[20px] inline-flex ">
+            <div key={btn} id={btn} className={styles.btnbordar}>
               <h3>{btnList[btn].panelName}</h3>
-              <label className="relative inline-flex items-center cursor-pointer">
+              <img
+                onClick={() => {
+                  Delete(btn);
+                }}
+                className={styles.icon}
+                src={"icon/icons8-delete.svg"}
+                alt=""
+              />
+              <div className={styles.checkboxwrapper}>
                 <input
-                  className="sr-only peer"
-                  value=""
                   type="checkbox"
-                  onChange={(e) => {
-                    check(e.target);
-                  }}
+                  id={index}
+                  className={`${styles.tgl} ${styles.tglskewed}`}
                 />
-                <div
-                  className="peer rounded-br-2xl rounded-tl-2xl outline-none duration-100 after:duration-500 w-28 h-14 bg-blue-300 
-              peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-500 
-              after:content-['OFF'] after:absolute after:outline-none after:rounded-br-xl after:rounded-tl-xl after:h-12 after:w-12 after:bg-white after:top-1 after:left-1 after:flex 
-              after:justify-center after:items-center  after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['ON'] peer-checked:after:border-white"
-                ></div>
-              </label>
+                <label
+                  for={index}
+                  data-tg-on="ON"
+                  data-tg-off="OFF"
+                  className={styles.tglbtn}
+                ></label>
+              </div>
             </div>
           );
         })}

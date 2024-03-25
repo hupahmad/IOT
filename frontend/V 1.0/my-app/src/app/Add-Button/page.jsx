@@ -12,28 +12,32 @@ export default function AddButton() {
   const [pay, setpay] = useState("");
 
   async function create() {
-    let resp = "";
-    await fetch("http://147.135.51.66:1111/create", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ panelName: pan, topic: top, payload: pay }),
-    })
-      .then(async function (a) {
-        await a.text().then((t) => {
-          resp = t;
-        });
+    if (pan != "" && top != "" && pay != "") {
+      let resp = "";
+      await fetch("http://147.135.51.66:1111/create", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ panelName: pan, topic: top, payload: pay }),
       })
-      .then(() => {
-        if (resp === "ok") {
-          window.location.href = "/";
-          console.log("create");
-        } else {
-          console.log("error");
-        }
-      });
+        .then(async function (a) {
+          await a.text().then((t) => {
+            resp = t;
+          });
+        })
+        .then(() => {
+          if (resp === "ok") {
+            window.location.href = "/";
+            console.log("create");
+          } else {
+            console.log("error");
+          }
+        });
+    } else {
+      console.log("error");
+    }
   }
 
   return (
@@ -51,23 +55,19 @@ export default function AddButton() {
                 setpan(e.target.value);
               }}
             />
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Topic*"
-              onChange={(e) => {
-                settop(e.target.value);
-              }}
-            />
-
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Payload*"
-              onChange={(e) => {
-                setpay(e.target.value);
-              }}
-            />
+            <form className={styles.form} action="/action_page.php">
+              <label for="cars">Select:</label>
+              <select name="cars" id="cars">
+                <option value="Port 1">Port 1</option>
+                <option value="Port 2">Port 2</option>
+                <option value="Port 3">Port 3</option>
+                <option value="Port 4">Port 4</option>
+                <option value="LED 1">LED 1</option>
+                <option value="LED 2">LED 2</option>
+                <option value="LED 3">LED 3</option>
+              </select>
+              <br></br>
+            </form>
           </div>
           <div onClick={create} className={styles.btn}>
             CREATE
